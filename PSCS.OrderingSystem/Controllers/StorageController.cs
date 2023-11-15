@@ -11,15 +11,27 @@ namespace PSCS.OrderingSystem.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult Add()
+        {
+            return View();
+        }
+
         [HttpPost]
-        [ActionName("Add")]
+        [ActionName("AddStorage")]
         public IActionResult AddStorage(StorageRequest request)
         {
             if (ModelState.IsValid)
             {
-                return RedirectToAction("Index");
+                return Redirect("Add");
             }
-            return View("Index", request);
+            return View("Add", request);
+        }
+
+        [HttpGet]
+        public IActionResult Edit()
+        {
+            return View();
         }
     }
 }
