@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34202.233
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PSCS.API", "PSCS\PSCS.API.csproj", "{8A21E6FA-BF9B-4332-9A1D-A204FD1F3468}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PSCS.API", "PSCS\PSCS.API.csproj", "{8A21E6FA-BF9B-4332-9A1D-A204FD1F3468}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PSCS.Domain", "PSCS.Domain\PSCS.Domain.csproj", "{F6DB66D6-8EEF-49BA-958D-4DEB0B124022}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PSCS.Domain", "PSCS.Domain\PSCS.Domain.csproj", "{F6DB66D6-8EEF-49BA-958D-4DEB0B124022}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PSCS.Infrastructure", "PSCS.Infrastructure\PSCS.Infrastructure.csproj", "{9CD191BD-E708-49FD-9ECF-FA78D0E03F9E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PSCS.Infrastructure", "PSCS.Infrastructure\PSCS.Infrastructure.csproj", "{9CD191BD-E708-49FD-9ECF-FA78D0E03F9E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PSCS.OrderingSystem", "PSCS.OrderingSystem\PSCS.OrderingSystem.csproj", "{83B2D6FC-FA7F-40D7-8183-418668803D77}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{9CD191BD-E708-49FD-9ECF-FA78D0E03F9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9CD191BD-E708-49FD-9ECF-FA78D0E03F9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9CD191BD-E708-49FD-9ECF-FA78D0E03F9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83B2D6FC-FA7F-40D7-8183-418668803D77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83B2D6FC-FA7F-40D7-8183-418668803D77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83B2D6FC-FA7F-40D7-8183-418668803D77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83B2D6FC-FA7F-40D7-8183-418668803D77}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
