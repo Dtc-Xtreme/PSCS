@@ -48,7 +48,13 @@ namespace PSCS.Controllers
             return Ok(await storageRepository.Create(newStorage) == false ? NotFound() : newStorage);
         }
 
-        [HttpDelete("id")]
+        [HttpPut]
+        public async Task<IActionResult> Update(Storage storage)
+        {
+            return Ok(await storageRepository.Update(storage) == false ? NotFound() : storage);
+        }
+
+        [HttpDelete("{id}")]
         public async Task<IActionResult> Remove(int id)
         {
             return Ok(await storageRepository.Remove(id) == false ? NotFound() : "Supplier is removed!");

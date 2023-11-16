@@ -3,6 +3,7 @@ using PSCS.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http.Json;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
@@ -28,6 +29,42 @@ namespace PSCS.AppLogic.Services
             {
                 return await client.GetFromJsonAsync<List<Storage>>(url + "/Storage");
 
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        public async Task<Storage?> FindStorageById(int id)
+        {
+            try
+            {
+                return await client.GetFromJsonAsync<Storage>(url + "/Storage/" + id);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public async Task<Storage?> SaveStorage(Storage storage)
+        {
+            try
+            {
+                HttpResponseMessage httpResponseMessage;
+
+                if (storage.Id == 0)
+                {
+                    httpResponseMessage = await client.PostAsJsonAsync(url + "/Storage", storage);
+                }
+                else
+                {
+                    httpResponseMessage = await client.PutAsJsonAsync(url + "/Storage", storage);
+                }
+
+                Storage? result = httpResponseMessage.Content.ReadFromJsonAsync<Storage>().Result;
+
+                return httpResponseMessage.StatusCode == HttpStatusCode.OK ? result : null;
             }
             catch (Exception ex)
             {

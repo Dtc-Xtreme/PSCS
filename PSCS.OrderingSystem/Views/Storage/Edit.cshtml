@@ -1,11 +1,13 @@
-﻿@model StorageRequest
+﻿@using PSCS.Domain;
+
+@model Storage
 
 <div class="card">
     <div class="card-header">
         Edit
     </div>
     <div class="card-body">
-        <form method="post" action="/Storage/Add">
+        <form method="post" action="/Storage/Save">
             <div class="mb-3">
                 <label for="id" class="form-label">Id:</label>
                 <input type="number" class="form-control" id="id" placeholder="Id" asp-for="@Model.Id" readonly>

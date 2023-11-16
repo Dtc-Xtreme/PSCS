@@ -5,7 +5,7 @@ using PSCS.OrderingSystem.Models;
 
 namespace PSCS.OrderingSystem.Controllers
 {
-    //[Route("[controller]/[Action]")]
+    [Route("[controller]")]
     public class StorageController : Controller
     {
         private readonly IApiService apiService;
@@ -22,30 +22,38 @@ namespace PSCS.OrderingSystem.Controllers
             return View(storages);
         }
 
-        [HttpGet]
-        public IActionResult Add()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult AddStorage(StorageRequest request)
+        [HttpPost("Save")]
+        public async Task<IActionResult> Save(Storage request)
         {
             if (ModelState.IsValid)
             {
-                return Redirect("Add");
+                Storage? result = await apiService.SaveStorage(request);
+                if (result != null) return RedirectToAction("Index");
             }
-            return View("Add", request);
+
+            return RedirectToAction("Edit", request);
         }
 
-        [HttpGet("{id}")]
-        public IActionResult Edit(int id)
+        [HttpGet("Edit")]
+        [HttpGet("Edit/{id}")]
+        public async Task<IActionResult> Edit(int id)
         {
-            return View();
+            Storage? selectedStorage;
+
+            if (id == 0)
+            {
+                selectedStorage = new();
+            }
+            else
+            {
+                selectedStorage = await apiService.FindStorageById(id);
+            }
+            
+
+            return View(selectedStorage);
         }
 
-        [HttpDelete]
-        [Route("{id}")]
+        [HttpGet("Delete/{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             bool deleted = await apiService.RemoveStorage(id);

@@ -38,6 +38,11 @@ namespace PSCS.Infrastructure.Repositories
             Storage? selected = await context.Storages.FirstOrDefaultAsync(c => c.Id == storage.Id);
             if (selected != null)
             {
+                selected.Mloc = storage.Mloc;
+                selected.Name = storage.Name;
+                selected.Mloc = storage.Mloc;
+                selected.Mix = storage.Mix;
+                selected.Blocked = storage.Blocked;
                 return await context.SaveChangesAsync() == 0 ? false : true;
             }
             return false;
