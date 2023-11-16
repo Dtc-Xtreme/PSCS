@@ -30,7 +30,7 @@ namespace PSCS.Controllers
         {
             Product? product = await productRepository.FindById(id);
 
-            return Ok(product == null ? NotFound() : product);
+            return Ok(product == null ? BadRequest() : product);
         }
 
         [HttpPost]
@@ -47,13 +47,13 @@ namespace PSCS.Controllers
                     SupplierId = product.SupplierId
                 };
             }
-            return Ok(await productRepository.Create(newProduct) == false ? NotFound() : newProduct);
+            return Ok(await productRepository.Create(newProduct) == false ? BadRequest() : newProduct);
         }
 
         [HttpDelete("id")]
         public async Task<IActionResult> Remove(int id)
         {
-            return Ok(await productRepository.Remove(id) == false ? NotFound() : "Product is removed!");
+            return Ok(await productRepository.Remove(id) == false ? BadRequest() : "Product is removed!");
         }
     }
 }

@@ -21,7 +21,7 @@ namespace PSCS.Controllers
         public async Task<IActionResult> GetAll()
         {
             IList<Supplier> suppliers = await supplierRepository.Suppliers.ToListAsync();
-            return Ok(suppliers == null ? NotFound() : suppliers);
+            return Ok(suppliers == null ? BadRequest() : suppliers);
         }
 
         [HttpGet("{id}")]
@@ -29,7 +29,7 @@ namespace PSCS.Controllers
         {
             Supplier? supplier = await supplierRepository.FindById(id);
 
-            return Ok(supplier == null ? NotFound() : supplier);
+            return Ok(supplier == null ? BadRequest() : supplier);
         }
 
         [HttpPost]
@@ -47,13 +47,13 @@ namespace PSCS.Controllers
                     Phone = supplier.Phone
                 };
             }
-            return Ok(await supplierRepository.Create(newSupplier) == false ? NotFound() : newSupplier);
+            return Ok(await supplierRepository.Create(newSupplier) == false ? BadRequest() : newSupplier);
         }
 
         [HttpDelete("id")]
         public async Task<IActionResult> Remove(int id)
         {
-            return Ok(await supplierRepository.Remove(id) == false ? NotFound() : "Supplier is removed!");
+            return Ok(await supplierRepository.Remove(id) == false ? BadRequest() : "Supplier is removed!");
         }
     }
 }

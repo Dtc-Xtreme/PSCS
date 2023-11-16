@@ -23,7 +23,7 @@ namespace PSCS.AppLogic.Services
             this.url = configuration.GetConnectionString("api");
         }
 
-        public async Task<List<Storage>?> GetAllStorages()
+        public async Task<IList<Storage>?> GetAllStorages()
         {
             try
             {
@@ -63,7 +63,22 @@ namespace PSCS.AppLogic.Services
                 }
 
                 Storage? result = httpResponseMessage.Content.ReadFromJsonAsync<Storage>().Result;
+                return httpResponseMessage.StatusCode == HttpStatusCode.OK ? result : null;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
 
+        public async Task<IList<Storage>?> CreateMultipleStorages(IList<Storage> storages)
+        {
+            try
+            {
+                HttpResponseMessage httpResponseMessage;
+
+                httpResponseMessage = await client.PostAsJsonAsync(url + "/Storage/CreateMultiple", storages);
+                IList<Storage>? result = httpResponseMessage.Content.ReadFromJsonAsync<IList<Storage>>().Result;
                 return httpResponseMessage.StatusCode == HttpStatusCode.OK ? result : null;
             }
             catch (Exception ex)

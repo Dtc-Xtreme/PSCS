@@ -21,7 +21,7 @@ namespace PSCS.Controllers
         public async Task<IActionResult> GetAll()
         {
             IList<Storage> storages = await storageRepository.Storages.ToListAsync();
-            return Ok(storages == null ? NotFound() : storages);
+            return Ok(storages == null ? BadRequest() : storages);
         }
 
         [HttpGet("{id}")]
@@ -29,7 +29,7 @@ namespace PSCS.Controllers
         {
             Storage? storage = await storageRepository.FindById(id);
 
-            return Ok(storage == null ? NotFound() : storage);
+            return Ok(storage == null ? BadRequest() : storage);
         }
 
         [HttpPost]
@@ -47,19 +47,33 @@ namespace PSCS.Controllers
                     Blocked = storage.Blocked
                 };
             }
-            return Ok(await storageRepository.Create(newStorage) == false ? NotFound() : newStorage);
+            return Ok(await storageRepository.Create(newStorage) == false ? BadRequest() : newStorage);
+        }
+
+        [HttpPost("CreateMultiple")]
+        public async Task<IActionResult> CreateMultiple(List<Storage> storageList)
+        {
+            if (storageList == null || !storageList.Any())
+            {
+                return BadRequest("The provided list is empty or null.");
+            }
+
+            // Save the list of new storages to the repository
+            
+
+            return Ok(await storageRepository.CreateMultipe(storageList) == false ? BadRequest() : storageList);
         }
 
         [HttpPut]
         public async Task<IActionResult> Update(Storage storage)
         {
-            return Ok(await storageRepository.Update(storage) == false ? NotFound() : storage);
+            return Ok(await storageRepository.Update(storage) == false ? BadRequest() : storage);
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Remove(int id)
         {
-            return Ok(await storageRepository.Remove(id) == false ? NotFound() : "Supplier is removed!");
+            return Ok(await storageRepository.Remove(id) == false ? BadRequest() : "Supplier is removed!");
         }
     }
 }

@@ -42,18 +42,18 @@ namespace PSCS.OrderingSystem.Controllers
         [HttpGet("AddMultiple")]
         public IActionResult AddMultiple()
         {
-            AddMultipleStoragesViewModel vm = new AddMultipleStoragesViewModel();
-            //{
-            //    AisleLetter =  "B",
-            //    AisleStart = 1,
-            //    AisleEnd  = 2,
-            //    StackStart = 1,
-            //    StackEnd = 5,
-            //    LevelStart = 'A',
-            //    LevelEnd = 'C',
-            //    SectionStart = 1,
-            //    SectionEnd = 4,
-            //};
+            AddMultipleStoragesViewModel vm = new AddMultipleStoragesViewModel
+            {
+                AisleLetter = "B",
+                AisleStart = 1,
+                AisleEnd = 2,
+                StackStart = 1,
+                StackEnd = 5,
+                LevelStart = 'A',
+                LevelEnd = 'C',
+                SectionStart = 1,
+                SectionEnd = 4,
+            };
             return View(vm);
         }
 
@@ -92,8 +92,9 @@ namespace PSCS.OrderingSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                List<Storage> newStorages = new List<Storage>();
+                IList<Storage> newStorages = new List<Storage>();
 
+                // dit werkt voor A0101A1 gangen maar niet voor 2EH01A1
                 for (int aisle = request.AisleStart; aisle < request.AisleEnd; aisle++)
                 {
                     for (int stack = request.StackStart; stack < request.StackEnd; stack++)
@@ -115,11 +116,9 @@ namespace PSCS.OrderingSystem.Controllers
                     } 
                 }
 
-                Storage? result = null;
+                IList<Storage>? result = null;
 
-                foreach (Storage storage in newStorages) {
-                    result = await apiService.SaveStorage(storage);
-                }
+                result = await apiService.CreateMultipleStorages(newStorages);
                  
                 if (result != null) return RedirectToAction("Index");
             }

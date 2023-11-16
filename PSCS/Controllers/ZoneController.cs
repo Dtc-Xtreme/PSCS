@@ -21,7 +21,7 @@ namespace PSCS.Controllers
         public async Task<IActionResult> GetAll()
         {
             IList<Zone> zones = await zoneRepository.Zones.ToListAsync();
-            return Ok(zones == null ? NotFound() : zones);
+            return Ok(zones == null ? BadRequest() : zones);
         }
 
         [HttpGet("{id}")]
@@ -29,7 +29,7 @@ namespace PSCS.Controllers
         {
             Zone? zone = await zoneRepository.FindById(id);
 
-            return Ok(zone == null ? NotFound() : zone);
+            return Ok(zone == null ? BadRequest() : zone);
         }
 
         [HttpPost]
@@ -44,13 +44,13 @@ namespace PSCS.Controllers
                     Name = zone.Name
                 };
             }
-            return Ok(await zoneRepository.Create(newZone) == false ? NotFound() : newZone);
+            return Ok(await zoneRepository.Create(newZone) == false ? BadRequest() : newZone);
         }
 
         [HttpDelete("id")]
         public async Task<IActionResult> Remove(int id)
         {
-            return Ok(await zoneRepository.Remove(id) == false ? NotFound() : "Supplier is removed!");
+            return Ok(await zoneRepository.Remove(id) == false ? BadRequest() : "Supplier is removed!");
         }
     }
 }

@@ -11,6 +11,7 @@ namespace PSCS.Infrastructure.Repositories
     {
         public IQueryable<Storage> Storages { get; }
         public Task<bool> Update(Storage item);
+        public Task<bool> CreateMultipe(IList<Storage> storages);
 
     }
 }

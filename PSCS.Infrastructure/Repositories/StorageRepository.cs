@@ -55,5 +55,11 @@ namespace PSCS.Infrastructure.Repositories
             context.Storages.Remove(storage);
             return await context.SaveChangesAsync() == 0 ? false : true;
         }
+
+        public async Task<bool> CreateMultipe(IList<Storage> storages)
+        {
+            await context.Storages.AddRangeAsync(storages);
+            return await context.SaveChangesAsync() == 0 ? false : true;
+        }
     }
 }
