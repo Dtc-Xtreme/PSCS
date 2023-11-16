@@ -1,0 +1,79 @@
+﻿@using PSCS.Domain;
+
+@model AddMultipleStoragesViewModel
+
+<div class="card">
+    <div class="card-header">
+        <div class="col">
+            <h4 class="pt-1 m-0">Add Multiple Storages</h4>
+        </div>
+    </div>
+    <div class="card-body">
+        <form method="post" action="/Storage/SaveMultiple">
+            <div class="mb-3">
+                <label for="AisleLetter" class="form-label">Aisle letter:</label>
+                <input type="text" class="form-control" id="AisleLetter" placeholder="Aisle letter" asp-for="@Model.AisleLetter">
+                <span asp-validation-for="@Model.AisleLetter" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label for="AisleStart" class="form-label">Aisle start:</label>
+                <input type="number" class="form-control" id="AisleStart" placeholder="Aisle start" asp-for="@Model.AisleStart" />
+                <span asp-validation-for="@Model.AisleStart" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label for="AisleEnd" class="form-label">Aisle end:</label>
+                <input type="number" class="form-control" id="AisleEnd" placeholder="Aisle end" asp-for="@Model.AisleEnd" />
+                <span asp-validation-for="@Model.AisleEnd" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label for="StackStart" class="form-label">Stack start:</label>
+                <input type="number" class="form-control" id="StackStart" placeholder="Stack start" asp-for="@Model.StackStart" />
+                <span asp-validation-for="@Model.StackStart" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label for="StackEnd" class="form-label">Stack end:</label>
+                <input type="number" class="form-control" id="StackEnd" placeholder="Stack end" asp-for="@Model.StackEnd" />
+                <span asp-validation-for="@Model.StackEnd" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label for="Levelstart" class="form-label">Level start:</label>
+                <input type="text" class="form-control" id="Levelstart" placeholder="Level start" asp-for="@Model.LevelStart" />
+                <span asp-validation-for="@Model.LevelStart" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label for="LevelEnd" class="form-label">Level end:</label>
+                <input type="text" class="form-control" id="LevelEnd" placeholder="Level end" asp-for="@Model.LevelEnd" />
+                <span asp-validation-for="@Model.LevelEnd" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label for="SectionEnd" class="form-label">Section start:</label>
+                <input type="number" class="form-control" id="SectionEnd" placeholder="Section start" asp-for="@Model.SectionStart" />
+                <span asp-validation-for="@Model.SectionStart" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label for="SectionEnd" class="form-label">Section end:</label>
+                <input type="number" class="form-control" id="SectionEnd" placeholder="Section end" asp-for="@Model.SectionEnd" />
+                <span asp-validation-for="@Model.SectionEnd" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3 form-check">
+                <input class="form-check-input" type="checkbox" asp-for="@Model.Mloc" id="mloc" />
+                <label class="form-check-label" for="mloc">Mloc</label>
+            </div>
+            <div class="mb-3 form-check">
+                <input class="form-check-input" type="checkbox" asp-for="@Model.Mix" id="mix" />
+                <label class="form-check-label" for="mix">Mix</label>
+            </div>
+            <div class="mb-3 form-check">
+                <input class="form-check-input" type="checkbox" asp-for="@Model.Blocked" id="blocked" />
+                <label class="form-check-label" for="blocked">Blocked</label>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="reset" class="btn btn-danger">Clear</button>
+        </form>
+    </div>
+</div>

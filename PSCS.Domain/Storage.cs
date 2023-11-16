@@ -20,5 +20,10 @@ namespace PSCS.Domain
 
         public bool Mix { get; set; } = false;
         public bool Blocked { get; set; } = false;
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

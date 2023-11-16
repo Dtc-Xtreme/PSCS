@@ -20,7 +20,7 @@ namespace PSCS.Infrastructure.Repositories
             this.context = ctx;
         }
 
-        public IQueryable<Storage> Storages => context.Storages;
+        public IQueryable<Storage> Storages => context.Storages.OrderBy(c=>c.Name);
 
         public async Task<bool> Create(Storage item)
         {

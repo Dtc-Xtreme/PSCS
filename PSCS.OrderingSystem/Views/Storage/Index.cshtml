@@ -8,10 +8,12 @@
             <div class="col-auto">
                 <a class="btn btn-primary" asp-controller="Storage" asp-action="Add">+</a>
             </div>
+            <div class="col-auto">
+                <a class="btn btn-secondary" asp-controller="Storage" asp-action="AddMultiple">+++</a>
+            </div>
             <div class="col">
                 <h4 class="pt-1 m-0">Storages</h4>
             </div>
-
             <div class="col-auto">
                 <form method="get" action="/Storage?Search=@Model.Search">
                     <div class="input-group">
