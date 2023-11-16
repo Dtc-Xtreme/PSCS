@@ -23,6 +23,11 @@ namespace PSCS.Infrastructure
             optionsBuilder.UseSqlServer(configuration.GetConnectionString("db"));
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Storage>().HasIndex(p => p.Name).IsUnique(true);
+        }
+
         public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Zone> Zones { get; set; }
