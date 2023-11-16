@@ -6,4 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PSCS.AppLogic\PSCS.AppLogic.csproj" />
+  </ItemGroup>
+
 </Project>
