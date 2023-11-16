@@ -42,7 +42,9 @@ namespace PSCS.Controllers
                 newStorage = new Storage
                 {
                     Name = storage.Name,
-                    Mloc = storage.Mloc
+                    Mloc = storage.Mloc,
+                    Mix = storage.Mix,
+                    Blocked = storage.Blocked
                 };
             }
             return Ok(await storageRepository.Create(newStorage) == false ? NotFound() : newStorage);

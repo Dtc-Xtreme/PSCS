@@ -44,7 +44,12 @@ namespace PSCS.OrderingSystem.Controllers
             return RedirectToAction("Edit", request);
         }
 
-        [HttpGet("Edit")]
+        [HttpGet("Add")]
+        public IActionResult Add() { 
+            return View(new Storage());
+        }
+
+
         [HttpGet("Edit/{id}")]
         public async Task<IActionResult> Edit(int id)
         {

@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PSCS.Infrastructure", "PSCS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PSCS.OrderingSystem", "PSCS.OrderingSystem\PSCS.OrderingSystem.csproj", "{83B2D6FC-FA7F-40D7-8183-418668803D77}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PSCS.AppLogic", "PSCS.AppLogic\PSCS.AppLogic.csproj", "{E0DC6A29-9A25-425D-B891-3A6E63B1FA83}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PSCS.AppLogic", "PSCS.AppLogic\PSCS.AppLogic.csproj", "{E0DC6A29-9A25-425D-B891-3A6E63B1FA83}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
