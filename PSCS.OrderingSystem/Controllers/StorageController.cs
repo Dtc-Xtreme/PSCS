@@ -16,10 +16,20 @@ namespace PSCS.OrderingSystem.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index()
+        [HttpGet("{Search?}")]
+        public async Task<IActionResult> Index(string? search)
         {
-            IList<Storage>? storages = await apiService.GetAllStorages();
-            return View(storages);
+            IList<Storage>? storages = await apiService.GetAllStorages(); ;
+
+            if (!string.IsNullOrEmpty(search)) storages = storages?.Where(c=>c.Name.Contains(search)).ToList();
+
+            StorageSearchViewModel vm = new StorageSearchViewModel
+            {
+                Storages = storages,
+                Search = search
+            };
+
+            return View(vm);
         }
 
         [HttpPost("Save")]

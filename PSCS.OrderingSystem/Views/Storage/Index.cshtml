@@ -1,43 +1,55 @@
 ﻿@using PSCS.Domain;
 
-@model IList<Storage>
+@model StorageSearchViewModel
 
 <div class="card">
     <div class="card-header">
         <div class="row">
+            <div class="col-auto">
+                <a class="btn btn-primary" asp-controller="Storage" asp-action="Edit">+</a>
+            </div>
             <div class="col">
                 <h4 class="pt-1 m-0">Storages</h4>
             </div>
+
             <div class="col-auto">
-                <a class="btn btn-primary" asp-controller="Storage" asp-action="Edit">Add</a>
+                <form method="get" action="/Storage?Search=@Model.Search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" asp-for="@Model.Search" placeholder="Name" />
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-    <div class="card-body">
-        <table class="table">
+    <div class="card-body overflow-auto">
+        <table class="table table-striped table-hover">
             <thead>
                 <tr>             
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Mloc</th>
-                    <th>Mix</th>
-                    <th>Blocked</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
+                    <th class="text-center">ID</th>
+                    <th class="">Name</th>
+                    <th class="text-center">Mloc</th>
+                    <th class="text-center">Mix</th>
+                    <th class="text-center">Blocked</th>
+                    <th class="text-center">Edit</th>
+                    <th class="text-center">Delete</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach(Storage storage in Model)
+                @if(Model.Storages != null)
                 {
-                    <tr>
-                        <td>@storage.Id</td>
-                        <td>@storage.Name</td>
-                        <td>@storage.Mloc</td>
-                        <td>@storage.Mix</td>
-                        <td>@storage.Blocked</td>
-                        <td><a class="btn btn-warning" asp-controller="Storage" asp-action="Edit" asp-route-id="@storage.Id">Edit</a></td>
-                        <td><a class="btn btn-danger" asp-controller="Storage" asp-action="Delete" asp-route-id="@storage.Id">Delete</a></td>
-                    </tr>
+                    foreach (Storage storage in Model.Storages)
+                    {
+                        <tr>
+                            <td class="text-center align-middle">@storage.Id</td>
+                            <td class="align-middle">@storage.Name</td>
+                            <td class="text-center align-middle">@storage.Mloc</td>
+                            <td class="text-center align-middle">@storage.Mix</td>
+                            <td class="text-center align-middle">@storage.Blocked</td>
+                            <td class="text-center align-middle"><a class="btn btn-warning" asp-controller="Storage" asp-action="Edit" asp-route-id="@storage.Id">Edit</a></td>
+                            <td class="text-center align-middle"><a class="btn btn-danger" asp-controller="Storage" asp-action="Delete" asp-route-id="@storage.Id">X</a></td>
+                        </tr>
+                    }
                 }
             </tbody>
         </table>
