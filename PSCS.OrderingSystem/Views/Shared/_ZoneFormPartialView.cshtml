@@ -1,0 +1,16 @@
+﻿@using PSCS.Domain;
+
+@model Zone;
+
+<form method="post" action="/Zone/Save">
+    <div class="mb-3">
+        <label for="id" class="form-label">Id:</label>
+        <input type="number" class="form-control" id="id" placeholder="Id" asp-for="@Model.Id" readonly>
+    </div>
+    <div class="mb-3">
+        <label for="name" class="form-label">Zone:</label>
+        <input type="text" class="form-control" id="name" placeholder="Name" asp-for="@Model.Name" />
+        <span asp-validation-for="@Model.Name" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>

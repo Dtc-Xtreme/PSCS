@@ -47,10 +47,16 @@ namespace PSCS.Controllers
             return Ok(await zoneRepository.Create(newZone) == false ? BadRequest() : newZone);
         }
 
-        [HttpDelete("id")]
+        [HttpPut]
+        public async Task<IActionResult> Update(Zone zone)
+        {
+            return Ok(await zoneRepository.Update(zone) == false ? BadRequest() : zone);
+        }
+
+        [HttpDelete("{id}")]
         public async Task<IActionResult> Remove(int id)
         {
-            return Ok(await zoneRepository.Remove(id) == false ? BadRequest() : "Supplier is removed!");
+            return Ok(await zoneRepository.Remove(id) == false ? BadRequest() : "Zone is removed!");
         }
     }
 }

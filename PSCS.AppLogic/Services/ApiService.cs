@@ -46,7 +46,6 @@ namespace PSCS.AppLogic.Services
                 return null;
             }
         }
-
         public async Task<Storage?> SaveStorage(Storage storage)
         {
             try
@@ -70,7 +69,6 @@ namespace PSCS.AppLogic.Services
                 return null;
             }
         }
-
         public async Task<IList<Storage>?> CreateMultipleStorages(IList<Storage> storages)
         {
             try
@@ -86,12 +84,70 @@ namespace PSCS.AppLogic.Services
                 return null;
             }
         }
-
         public async Task<bool> RemoveStorage(int id)
         {
             try
             {
                 HttpResponseMessage response = await client.DeleteAsync(url + "/Storage/" + id);
+                return response.StatusCode == System.Net.HttpStatusCode.OK ? true : false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public async Task<IList<Zone>?> GetAllZones()
+        {
+            try
+            {
+                return await client.GetFromJsonAsync<List<Zone>>(url + "/Zone");
+
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        public async Task<Zone?> FindZoneById(int id)
+        {
+            try
+            {
+                return await client.GetFromJsonAsync<Zone>(url + "/Zone/" + id);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        public async Task<Zone?> SaveZone(Zone zone)
+        {
+            try
+            {
+                HttpResponseMessage httpResponseMessage;
+
+                if (zone.Id == 0)
+                {
+                    httpResponseMessage = await client.PostAsJsonAsync(url + "/Zone", zone);
+                }
+                else
+                {
+                    httpResponseMessage = await client.PutAsJsonAsync(url + "/Zone", zone);
+                }
+
+                Zone? result = httpResponseMessage.Content.ReadFromJsonAsync<Zone>().Result;
+                return httpResponseMessage.StatusCode == HttpStatusCode.OK ? result : null;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        public async Task<bool> RemoveZone(int id)
+        {
+            try
+            {
+                HttpResponseMessage response = await client.DeleteAsync(url + "/Zone/" + id);
                 return response.StatusCode == System.Net.HttpStatusCode.OK ? true : false;
             }
             catch (Exception ex)

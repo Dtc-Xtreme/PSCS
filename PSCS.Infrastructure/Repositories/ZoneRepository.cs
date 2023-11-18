@@ -31,6 +31,17 @@ namespace PSCS.Infrastructure.Repositories
             return await Zones.FirstOrDefaultAsync(c => c.Id == id);
         }
 
+        public async Task<bool> Update(Zone zone)
+        {
+            Zone? selected = await context.Zones.FirstOrDefaultAsync(c => c.Id == zone.Id);
+            if (selected != null)
+            {
+                selected.Name = zone.Name;
+                return await context.SaveChangesAsync() == 0 ? false : true;
+            }
+            return false;
+        }
+
         public async Task<bool> Remove(int id)
         {
             Zone? zone = await Zones.FirstOrDefaultAsync(c => c.Id == id);

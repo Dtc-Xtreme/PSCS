@@ -15,5 +15,9 @@ namespace PSCS.AppLogic.Services
         public Task<IList<Storage>?> CreateMultipleStorages(IList<Storage> storages);
         public Task<bool> RemoveStorage(int id);
 
+        public Task<IList<Zone>?> GetAllZones();
+        public Task<Zone?> FindZoneById(int id);
+        public Task<Zone?> SaveZone(Zone zone);
+        public Task<bool> RemoveZone(int id);
     }
 }

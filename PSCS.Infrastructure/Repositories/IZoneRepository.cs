@@ -10,5 +10,6 @@ namespace PSCS.Infrastructure.Repositories
     public interface IZoneRepository : IPSCSRepository<Zone>
     {
         public IQueryable<Zone> Zones { get; }
+        public Task<bool> Update(Zone zone);
     }
 }

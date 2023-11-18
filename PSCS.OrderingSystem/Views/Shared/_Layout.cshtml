@@ -25,21 +25,14 @@
                         <li class="nav-item">
                             <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="Storage" asp-action="Index">Storage</a>
-                        </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" asp-controller="Storage" asp-action="Index" data-bs-toggle="dropdown" aria-expanded="false">Storage</a>
-
+                            <a class="nav-link dropdown-toggle cursor-pointer" data-bs-toggle="dropdown" aria-expanded="true">Admin</a>
                             <ul class="dropdown-menu">
-                                <li>
-                                    <a class="nav-link dropdown-item" asp-controller="Storage" asp-action="Add">Add</a>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="Storage" asp-action="Index">Storage</a>
                                 </li>
-                                <li>
-                                    <a class="nav-link dropdown-item" asp-controller="Storage" asp-action="Edit">Edit</a>
-                                </li>
-                                <li>
-                                    <a class="nav-link dropdown-item" asp-controller="Storage" asp-action="Delete">Delete</a>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="Zone" asp-action="Index">Zone</a>
                                 </li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="#">Something else here</a></li>
