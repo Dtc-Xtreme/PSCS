@@ -58,7 +58,7 @@ namespace PSCS.Controllers
             return Ok(await orderRepsository.Create(newOrder) == false ? BadRequest() : newOrder);
         }
 
-        [HttpDelete("id")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> Remove(int id)
         {
             return Ok(await orderRepsository.Remove(id) == false ? BadRequest() : "Order is removed!");

@@ -12,8 +12,8 @@ using PSCS.Infrastructure;
 namespace PSCS.Infrastructure.Migrations
 {
     [DbContext(typeof(PSCSDbContext))]
-    [Migration("20231112063736_v3")]
-    partial class v3
+    [Migration("20231119141426_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -86,7 +86,6 @@ namespace PSCS.Infrastructure.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<byte[]>("Image")
-                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<string>("Name")
@@ -123,9 +122,12 @@ namespace PSCS.Infrastructure.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
 
                     b.ToTable("Storages");
                 });

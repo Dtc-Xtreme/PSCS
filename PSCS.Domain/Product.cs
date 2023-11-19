@@ -20,11 +20,11 @@ namespace PSCS.Domain
         [MaxLength(100)]
         public string Description { get; set; }
 
-        [Required]
-        public Supplier Supplier { get; set; }
+        public Supplier? Supplier { get; set; }
 
+        [Required]
         public int SupplierId { get; set; }
 
-        public byte[] Image { get; set; }
+        public byte[]? Image { get; set; }
     }
 }

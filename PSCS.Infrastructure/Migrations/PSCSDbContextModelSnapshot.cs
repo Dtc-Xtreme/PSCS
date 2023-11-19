@@ -83,7 +83,6 @@ namespace PSCS.Infrastructure.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<byte[]>("Image")
-                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<string>("Name")

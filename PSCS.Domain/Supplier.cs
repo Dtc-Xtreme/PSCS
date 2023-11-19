@@ -26,5 +26,10 @@ namespace PSCS.Domain
         [Required]
         [MaxLength(30)]
         public string Phone { get; set; }
+
+        public override string ToString()
+        {
+            return Name + " (" + Id + ")";
+        }
     }
 }

@@ -50,7 +50,7 @@ namespace PSCS.Controllers
             return Ok(await supplierRepository.Create(newSupplier) == false ? BadRequest() : newSupplier);
         }
 
-        [HttpDelete("id")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> Remove(int id)
         {
             return Ok(await supplierRepository.Remove(id) == false ? BadRequest() : "Supplier is removed!");

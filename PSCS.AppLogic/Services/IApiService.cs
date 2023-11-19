@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Json;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,5 +21,13 @@ namespace PSCS.AppLogic.Services
         public Task<Zone?> FindZoneById(int id);
         public Task<Zone?> SaveZone(Zone zone);
         public Task<bool> RemoveZone(int id);
+
+        public Task<IList<Product>?> GetAllProducts();
+        public Task<Product?> FindProductById(int id);
+        public Task<Product?> SaveProduct(Product product);
+        public Task<bool> RemoveProduct(int id);
+
+        public Task<IList<Supplier>?> GetAllSuppliers();
+        public Task<Supplier?> FindSupplierById(int id);
     }
 }

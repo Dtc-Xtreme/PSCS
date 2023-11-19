@@ -50,7 +50,7 @@ namespace PSCS.Controllers
             return Ok(await productRepository.Create(newProduct) == false ? BadRequest() : newProduct);
         }
 
-        [HttpDelete("id")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> Remove(int id)
         {
             return Ok(await productRepository.Remove(id) == false ? BadRequest() : "Product is removed!");
