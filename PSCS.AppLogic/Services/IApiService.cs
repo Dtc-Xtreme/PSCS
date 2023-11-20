@@ -29,5 +29,7 @@ namespace PSCS.AppLogic.Services
 
         public Task<IList<Supplier>?> GetAllSuppliers();
         public Task<Supplier?> FindSupplierById(int id);
+        public Task<Supplier?> SaveSupplier(Supplier supplier);
+        public Task<bool> RemoveSupplier(int id);
     }
 }

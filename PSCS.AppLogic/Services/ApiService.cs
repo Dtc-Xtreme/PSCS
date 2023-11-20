@@ -239,5 +239,40 @@ namespace PSCS.AppLogic.Services
                 return null;
             }
         }
+        public async Task<Supplier?> SaveSupplier(Supplier supplier)
+        {
+            try
+            {
+                HttpResponseMessage httpResponseMessage;
+
+                if (supplier.Id == 0)
+                {
+                    httpResponseMessage = await client.PostAsJsonAsync(url + "/Supplier", supplier);
+                }
+                else
+                {
+                    httpResponseMessage = await client.PutAsJsonAsync(url + "/Supplier", supplier);
+                }
+
+                Supplier? result = httpResponseMessage.Content.ReadFromJsonAsync<Supplier>().Result;
+                return httpResponseMessage.StatusCode == HttpStatusCode.OK ? result : null;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        public async Task<bool> RemoveSupplier(int id)
+        {
+            try
+            {
+                HttpResponseMessage response = await client.DeleteAsync(url + "/Supplier/" + id);
+                return response.StatusCode == System.Net.HttpStatusCode.OK ? true : false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
     }
 }

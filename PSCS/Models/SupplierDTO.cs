@@ -5,8 +5,11 @@ namespace PSCS.API.Models
     public class SupplierDTO
     {
         [Required]
-        [Range(1000,9999)]
         public int Id { get; set; }
+
+        [Required]
+        [Range(1000, 9999)]
+        public int Number { get; set; }
 
         [Required]
         [MaxLength(50)]

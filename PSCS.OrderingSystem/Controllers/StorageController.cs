@@ -23,7 +23,7 @@ namespace PSCS.OrderingSystem.Controllers
         {
             IList<Storage>? storages = await apiService.GetAllStorages(); ;
 
-            if (!string.IsNullOrEmpty(search)) storages = storages?.Where(c=>c.Name.Contains(search)).ToList();
+            if (!string.IsNullOrEmpty(search)) storages = storages?.Where(c=>c.Name.ToLower().Contains(search.ToLower())).ToList();
 
             StorageSearchViewModel vm = new StorageSearchViewModel
             {
@@ -80,6 +80,7 @@ namespace PSCS.OrderingSystem.Controllers
         {
             if (ModelState.IsValid)
             {
+                request.Name = request.Name.ToUpper();
                 Storage? result = await apiService.SaveStorage(request);
                 if (result != null) return RedirectToAction("Index");
             }
@@ -106,7 +107,7 @@ namespace PSCS.OrderingSystem.Controllers
                                 newStorages.Add(
                                     new Storage
                                     {
-                                        Name = request.AisleLetter + aisle.ToString("D2") + stack.ToString("D2") + level.ToString() + section.ToString("D1"),
+                                        Name = request.AisleLetter.ToUpper() + aisle.ToString("D2") + stack.ToString("D2") + level.ToString().ToUpper() + section.ToString("D1"),
                                         Mloc = request.Mloc,
                                         Mix = request.Mix,
                                         Blocked = request.Blocked

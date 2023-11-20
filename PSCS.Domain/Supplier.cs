@@ -11,8 +11,10 @@ namespace PSCS.Domain
     public class Supplier
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
+
+        [Range(1000,9999)]
+        public int Number { get; set; }
 
         [Required]
         [MaxLength(50)]

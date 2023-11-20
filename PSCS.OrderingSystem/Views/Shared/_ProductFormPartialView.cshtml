@@ -30,18 +30,18 @@
             </div>
             <div class="mb-3">
                 <label for="description" class="form-label">Description:</label>
-                <input type="file" class="form-control" id="file" accept="image/jpeg, image/png" asp-for="@Model.Image" />
+                <input type="file" class="form-control" id="file" accept="image/jpeg, image/png" asp-for="@Model.Image"/>
             </div>
         </div>
 
         <div class="col-lg-3 col-sm-12">
             @if(Model.ImageBytes == null)
             {
-                <img class="rounded w-100" src="~/no-image.png" alt="Product image" />
+                <img id="image" class="rounded w-100" src="~/no-image.png" alt="Product image" />
             }
             else
             {
-                <img class="rounded w-100" src="@Model.ConvertByteArrayToBase64()" alt="Product image" />
+                <img id="image" class="rounded w-100" src="@Model.ConvertByteArrayToBase64()" alt="Product image" />
             }
         </div>
     </div>

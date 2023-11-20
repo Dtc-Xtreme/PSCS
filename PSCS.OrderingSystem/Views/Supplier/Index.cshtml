@@ -1,0 +1,56 @@
+﻿@using PSCS.Domain;
+
+@model SupplierSearchViewModel
+
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-auto">
+                <a class="btn btn-primary" asp-controller="Supplier" asp-action="Add">+</a>
+            </div>
+            <div class="col">
+                <h4 class="pt-1 m-0">Suppliers</h4>
+            </div>
+            <div class="col-auto">
+                <form method="get" action="/Supplier?Search=@Model.Search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" asp-for="@Model.Search" placeholder="Name" />
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="card-body overflow-auto">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>             
+                    <th class="text-center">ID</th>
+                    <th class="">Number</th>
+                    <th class="">Name</th>
+                    <th class="">Address</th>
+                    <th class="">Phone</th>
+                    <th class="text-center">Edit</th>
+                    <th class="text-center">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if(Model.Suppliers != null)
+                {
+                    foreach (Supplier supplier in Model.Suppliers)
+                    {
+                        <tr>
+                            <td class="text-center align-middle">@supplier.Id</td>
+                            <td class="align-middle">@supplier.Number</td>
+                            <td class="align-middle">@supplier.Name</td>
+                            <td class="align-middle">@supplier.Address</td>
+                            <td class="align-middle">@supplier.Phone</td>
+                            <td class="text-center align-middle"><a class="btn btn-warning" asp-controller="Supplier" asp-action="Edit" asp-route-id="@supplier.Id">Edit</a></td>
+                            <td class="text-center align-middle"><a class="btn btn-danger" asp-controller="Supplier" asp-action="Delete" asp-route-id="@supplier.Id">X</a></td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

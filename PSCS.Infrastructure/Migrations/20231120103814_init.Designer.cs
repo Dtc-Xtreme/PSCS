@@ -12,8 +12,8 @@ using PSCS.Infrastructure;
 namespace PSCS.Infrastructure.Migrations
 {
     [DbContext(typeof(PSCSDbContext))]
-    [Migration("20231119141426_Init")]
-    partial class Init
+    [Migration("20231120103814_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -135,7 +135,10 @@ namespace PSCS.Infrastructure.Migrations
             modelBuilder.Entity("PSCS.Domain.Supplier", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -146,6 +149,9 @@ namespace PSCS.Infrastructure.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("Number")
+                        .HasColumnType("int");
 
                     b.Property<string>("Phone")
                         .IsRequired()

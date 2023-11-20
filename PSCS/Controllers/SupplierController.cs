@@ -42,12 +42,19 @@ namespace PSCS.Controllers
                 newSupplier = new Supplier
                 {
                     Id = supplier.Id,
+                    Number = supplier.Number,
                     Name = supplier.Name,
                     Address = supplier.Address,
                     Phone = supplier.Phone
                 };
             }
             return Ok(await supplierRepository.Create(newSupplier) == false ? BadRequest() : newSupplier);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Update(Supplier supplier)
+        {
+            return Ok(await supplierRepository.Update(supplier) == false ? BadRequest() : supplier);
         }
 
         [HttpDelete("{id}")]

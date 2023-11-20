@@ -10,5 +10,6 @@ namespace PSCS.Infrastructure.Repositories
     public interface ISupplierRepository : IPSCSRepository<Supplier>
     {
         public IQueryable<Supplier> Suppliers { get; }
+        public Task<bool> Update(Supplier supplier);
     }
 }

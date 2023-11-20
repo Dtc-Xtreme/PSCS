@@ -8,11 +8,11 @@ using static System.Collections.Specialized.BitVector32;
 namespace PSCS.OrderingSystem.Controllers
 {
     [Route("[controller]")]
-    public class ZoneController : Controller
+    public class SupplierController : Controller
     {
         private readonly IApiService apiService;
 
-        public ZoneController(IApiService api)
+        public SupplierController(IApiService api)
         {
             this.apiService = api;
         }
@@ -21,13 +21,13 @@ namespace PSCS.OrderingSystem.Controllers
         [HttpGet("{Search?}")]
         public async Task<IActionResult> Index(string? search)
         {
-            IList<Zone>? zones = await apiService.GetAllZones(); ;
+            IList<Supplier>? suppliers = await apiService.GetAllSuppliers(); ;
 
-            if (!string.IsNullOrEmpty(search)) zones = zones?.Where(c=>c.Name.ToLower().Contains(search.ToLower())).ToList();
+            if (!string.IsNullOrEmpty(search)) suppliers = suppliers?.Where(c=>c.Name.ToLower().Contains(search.ToLower())).ToList();
 
-            ZoneSearchViewModel vm = new ZoneSearchViewModel
+            SupplierSearchViewModel vm = new SupplierSearchViewModel
             {
-                Zones = zones,
+                Suppliers = suppliers,
                 Search = search
             };
 
@@ -36,33 +36,32 @@ namespace PSCS.OrderingSystem.Controllers
 
         [HttpGet("Add")]
         public IActionResult Add() { 
-            return View(new Zone());
+            return View(new Supplier());
         }
 
         [HttpGet("Edit/{id}")]
         public async Task<IActionResult> Edit(int id)
         {
-            Zone? selectedZone;
+            Supplier? selectedSupplier;
 
             if (id == 0)
             {
-                selectedZone = new();
+                selectedSupplier = new();
             }
             else
             {
-                selectedZone = await apiService.FindZoneById(id);
+                selectedSupplier = await apiService.FindSupplierById(id);
             }
-            
 
-            return View(selectedZone);
+            return View(selectedSupplier);
         }
 
         [HttpPost("Save")]
-        public async Task<IActionResult> Save(Zone request)
+        public async Task<IActionResult> Save(Supplier request)
         {
             if (ModelState.IsValid)
             {
-                Zone? result = await apiService.SaveZone(request);
+                Supplier? result = await apiService.SaveSupplier(request);
                 if (result != null) return RedirectToAction("Index");
             }
 
@@ -72,7 +71,7 @@ namespace PSCS.OrderingSystem.Controllers
         [HttpGet("Delete/{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            bool deleted = await apiService.RemoveZone(id);
+            bool deleted = await apiService.RemoveSupplier(id);
 
             return RedirectToAction("Index");
         }
