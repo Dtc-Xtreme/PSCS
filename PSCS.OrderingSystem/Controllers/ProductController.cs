@@ -73,6 +73,7 @@ namespace PSCS.OrderingSystem.Controllers
             if (ModelState.IsValid)
             {
                 Product newProduct = new Product();
+                newProduct.Id = vm.Id;
                 newProduct.Name = vm.Name;
                 newProduct.Description = vm.Description;
                 newProduct.SupplierId = vm.SupplierId;

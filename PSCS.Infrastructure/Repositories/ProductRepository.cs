@@ -37,6 +37,9 @@ namespace PSCS.Infrastructure.Repositories
             if (selected != null)
             {
                 selected.Name = product.Name;
+                selected.Description = product.Description;
+                selected.SupplierId = product.SupplierId;
+                if(product.Image != null) selected.Image = product.Image;
                 return await context.SaveChangesAsync() == 0 ? false : true;
             }
             return false;
