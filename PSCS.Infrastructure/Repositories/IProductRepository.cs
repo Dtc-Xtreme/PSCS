@@ -10,5 +10,6 @@ namespace PSCS.Infrastructure.Repositories
     public interface IProductRepository : IPSCSRepository<Product>
     {
         public IQueryable<Product> Products { get; }
+        public Task<bool> Update(Product product);
     }
 }

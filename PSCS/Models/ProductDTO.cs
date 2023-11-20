@@ -15,5 +15,7 @@ namespace PSCS.API.Models
 
         [Required]
         public int SupplierId { get; set; }
+
+        public byte[]? Image {  get; set; }
     }
 }

@@ -44,10 +44,17 @@ namespace PSCS.Controllers
                 {
                     Name = product.Name,
                     Description = product.Description,
-                    SupplierId = product.SupplierId
+                    SupplierId = product.SupplierId,
+                    Image = product.Image
                 };
             }
             return Ok(await productRepository.Create(newProduct) == false ? BadRequest() : newProduct);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Update(Product product)
+        {
+            return Ok(await productRepository.Update(product) == false ? BadRequest() : product);
         }
 
         [HttpDelete("{id}")]

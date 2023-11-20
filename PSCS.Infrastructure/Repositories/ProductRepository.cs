@@ -31,6 +31,17 @@ namespace PSCS.Infrastructure.Repositories
             return await Products.FirstOrDefaultAsync(c => c.Id == id);
         }
 
+        public async Task<bool> Update(Product product)
+        {
+            Product? selected = await context.Products.FirstOrDefaultAsync(c => c.Id == product.Id);
+            if (selected != null)
+            {
+                selected.Name = product.Name;
+                return await context.SaveChangesAsync() == 0 ? false : true;
+            }
+            return false;
+        }
+
         public async Task<bool> Remove(int id)
         {
             Product? product = await Products.FirstOrDefaultAsync(c => c.Id == id);
