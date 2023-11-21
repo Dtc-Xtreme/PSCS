@@ -1,0 +1,35 @@
+﻿@using PSCS.Domain;
+@model StoreSearchViewModel
+
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col">
+                <h4 class="pt-1 m-0">Store</h4>
+            </div>
+            <div class="col-auto">
+                <form method="get" action="/Store?Search=@Model.Search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" asp-for="@Model.Search" placeholder="Name" />
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="container">
+            <div class="row g-4">
+                @if(Model.Products != null)
+                {
+                    foreach (Product product in Model.Products)
+                    {
+                        <partial name="_ProductTilePartialView" model="@product" />
+
+                    }
+                }
+            </div>
+        </div>
+        
+    </div>
+</div>

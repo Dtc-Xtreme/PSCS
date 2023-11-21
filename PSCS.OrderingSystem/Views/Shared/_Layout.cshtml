@@ -25,6 +25,9 @@
                         <li class="nav-item">
                             <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Store" asp-action="Index">Store</a>
+                        </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle cursor-pointer" data-bs-toggle="dropdown" aria-expanded="true">Admin</a>
                             <ul class="dropdown-menu">
@@ -49,6 +52,9 @@
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                         <button class="btn btn-outline-success" type="submit">Search</button>
                     </form> *@
+                    <div class="d-flex">
+                        <a class="btn btn-primary" asp-controller="Store" asp-action="Cart">Cart @(ViewBag.CartAmount != null && ViewBag.CartAmount > 0 ? "(" + ViewBag.CartAmount +")" : "")</a>
+                    </div>
                 </div>
             </div>
         </nav>

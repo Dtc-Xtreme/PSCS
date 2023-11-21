@@ -1,0 +1,14 @@
+﻿@using PSCS.Domain;
+
+@model Product;
+
+<div class="col-3">
+    <div class="card">
+        <img src="@(Model.Image != null ? "data:image/png;base64,"+Convert.ToBase64String(Model.Image) : "~/no-image.png")" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">@Model.Name (@Model.Id)</h5>
+            <p class="card-text">@Model.Description</p>
+        </div>
+        <a class="btn btn-primary" asp-controller="Store" asp-action="AddToCart" asp-route-item="@Model.Id" asp-route-amount="1">Add to cart</a>
+    </div>
+</div>

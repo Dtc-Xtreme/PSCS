@@ -5,6 +5,14 @@ using PSCS.AppLogic.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddHttpContextAccessor(); // Add this line to register IHttpContextAccessor
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(10);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 builder.Services.AddScoped<IApiService, ApiService>();
 builder.Services.AddControllersWithViews();
 
@@ -22,8 +30,9 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
 app.UseAuthorization();
+
+app.UseSession();
 
 app.MapControllerRoute(
     name: "default",

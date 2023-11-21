@@ -8,11 +8,11 @@ using static System.Collections.Specialized.BitVector32;
 namespace PSCS.OrderingSystem.Controllers
 {
     [Route("[controller]")]
-    public class SupplierController : Controller
+    public class SupplierController : BaseController
     {
         private readonly IApiService apiService;
 
-        public SupplierController(IApiService api)
+        public SupplierController(IHttpContextAccessor httpContextAccessor, IApiService api) : base(httpContextAccessor)
         {
             this.apiService = api;
         }

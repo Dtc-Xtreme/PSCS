@@ -8,11 +8,11 @@ using static System.Collections.Specialized.BitVector32;
 namespace PSCS.OrderingSystem.Controllers
 {
     [Route("[controller]")]
-    public class ZoneController : Controller
+    public class ZoneController : BaseController
     {
         private readonly IApiService apiService;
 
-        public ZoneController(IApiService api)
+        public ZoneController(IHttpContextAccessor httpContextAccessor, IApiService api) : base(httpContextAccessor)
         {
             this.apiService = api;
         }
@@ -21,6 +21,8 @@ namespace PSCS.OrderingSystem.Controllers
         [HttpGet("{Search?}")]
         public async Task<IActionResult> Index(string? search)
         {
+            ViewData["Title"] = "Zones";
+
             IList<Zone>? zones = await apiService.GetAllZones(); ;
 
             if (!string.IsNullOrEmpty(search)) zones = zones?.Where(c=>c.Name.ToLower().Contains(search.ToLower())).ToList();
@@ -35,13 +37,16 @@ namespace PSCS.OrderingSystem.Controllers
         }
 
         [HttpGet("Add")]
-        public IActionResult Add() { 
+        public IActionResult Add() {
+            ViewData["Title"] = "Add Zone";
             return View(new Zone());
         }
 
         [HttpGet("Edit/{id}")]
         public async Task<IActionResult> Edit(int id)
         {
+            ViewData["Title"] = "Edit Zone";
+
             Zone? selectedZone;
 
             if (id == 0)

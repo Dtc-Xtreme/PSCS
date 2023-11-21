@@ -1,0 +1,38 @@
+﻿@model List<OrderLine>
+
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col">
+                <h4 class="pt-1 m-0">Cart</h4>
+            </div>
+            <div class="col-auto">
+                <a class="btn btn-danger" asp-controller="Store" asp-action="ClearCart">Clear Cart</a>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <table>
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if(Model != null)
+                {
+                    foreach (OrderLine orderLine in Model)
+                    {
+                        <tr>
+                            <td>@orderLine.ProductId</td>
+                            <td>@orderLine.Amount</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+
+
+    </div>
+</div>
