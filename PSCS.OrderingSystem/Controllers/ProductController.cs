@@ -24,7 +24,7 @@ namespace PSCS.OrderingSystem.Controllers
         {
             IList<Product>? products = await apiService.GetAllProducts();
 
-            if (!string.IsNullOrEmpty(search)) vm.Products = vm.Products?.Where(c => c.Name.ToLower().Contains(search.ToLower()) || c.Id.ToString().ToLower().Contains(search.ToLower())).ToList();
+            if (!string.IsNullOrEmpty(search)) products = products?.Where(c => c.Name.ToLower().Contains(search.ToLower()) || c.Id.ToString().ToLower().Contains(search.ToLower())).ToList();
 
             ProductSearchViewModel vm = new ProductSearchViewModel
             {
