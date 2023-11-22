@@ -13,6 +13,9 @@ namespace PSCS.Domain
         public int Id { get; set; }
 
         [Required]
+        public int Number { get; set; }
+
+        [Required]
         [MaxLength(25)]
         public string Name { get; set; }
 

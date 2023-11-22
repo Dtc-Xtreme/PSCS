@@ -10,17 +10,22 @@
                 <input type="number" class="form-control" id="id" placeholder="Id" asp-for="@Model.Id" readonly>
             </div>
             <div class="mb-3">
+                <label for="number" class="form-label">Number:</label>
+                <input type="text" class="form-control" id="number" placeholder="Number" asp-for="@Model.Number" />
+                <span asp-validation-for="@Model.Number" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
                 <label for="name" class="form-label">Name:</label>
                 <input type="text" class="form-control" id="name" placeholder="Name" asp-for="@Model.Name" />
                 <span asp-validation-for="@Model.Name" class="text-danger"></span>
             </div>
             <div class="mb-3">
                 <label for="description" class="form-label">Description:</label>
-                <input type="text" class="form-control" id="description" placeholder="Name" asp-for="@Model.Description" />
+                <input type="text" class="form-control" id="description" placeholder="Description" asp-for="@Model.Description" />
                 <span asp-validation-for="@Model.Description" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label for="description" class="form-label">Description:</label>
+                <label for="description" class="form-label">Supplier:</label>
                 <select class="form-control" asp-for="@Model.SupplierId">
                     @foreach (Supplier sup in ViewBag.Suppliers)
                     {
@@ -35,7 +40,7 @@
         </div>
 
         <div class="col-lg-3 col-sm-12">
-            <img id="image" class="rounded w-100" src="@(Model.ImageBytes != null ? "data:image/png;base64,"+Convert.ToBase64String(Model.ImageBytes) : "~/no-image.png")" alt="Product Image">
+            <img id="image" class="rounded w-100" src="@(Model.ImageBytes != null ? "data:image/png;base64,"+Convert.ToBase64String(Model.ImageBytes) : "/no-image.png")" alt="Product Image">
         </div>
     </div>
     

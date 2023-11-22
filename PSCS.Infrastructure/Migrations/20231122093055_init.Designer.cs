@@ -12,7 +12,7 @@ using PSCS.Infrastructure;
 namespace PSCS.Infrastructure.Migrations
 {
     [DbContext(typeof(PSCSDbContext))]
-    [Migration("20231120103814_init")]
+    [Migration("20231122093055_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -93,10 +93,16 @@ namespace PSCS.Infrastructure.Migrations
                         .HasMaxLength(25)
                         .HasColumnType("nvarchar(25)");
 
+                    b.Property<int>("Number")
+                        .HasColumnType("int");
+
                     b.Property<int>("SupplierId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Number")
+                        .IsUnique();
 
                     b.HasIndex("SupplierId");
 
@@ -159,6 +165,9 @@ namespace PSCS.Infrastructure.Migrations
                         .HasColumnType("nvarchar(30)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Number")
+                        .IsUnique();
 
                     b.ToTable("Suppliers");
                 });

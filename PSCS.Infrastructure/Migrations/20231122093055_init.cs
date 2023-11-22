@@ -61,6 +61,7 @@ namespace PSCS.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Number = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     SupplierId = table.Column<int>(type: "int", nullable: false),
@@ -139,6 +140,12 @@ namespace PSCS.Infrastructure.Migrations
                 column: "ZoneId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Products_Number",
+                table: "Products",
+                column: "Number",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Products_SupplierId",
                 table: "Products",
                 column: "SupplierId");
@@ -147,6 +154,12 @@ namespace PSCS.Infrastructure.Migrations
                 name: "IX_Storages_Name",
                 table: "Storages",
                 column: "Name",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Suppliers_Number",
+                table: "Suppliers",
+                column: "Number",
                 unique: true);
         }
 

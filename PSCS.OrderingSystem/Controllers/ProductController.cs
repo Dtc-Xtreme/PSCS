@@ -74,6 +74,7 @@ namespace PSCS.OrderingSystem.Controllers
             {
                 Product newProduct = new Product();
                 newProduct.Id = vm.Id;
+                newProduct.Number = vm.Number;
                 newProduct.Name = vm.Name;
                 newProduct.Description = vm.Description;
                 newProduct.SupplierId = vm.SupplierId;
@@ -85,8 +86,8 @@ namespace PSCS.OrderingSystem.Controllers
                     {
                         await vm.Image.CopyToAsync(memoryStream);
 
-                        // Upload the file if less than 12 MB
-                        if (memoryStream.Length < 12582912)
+                        // Upload the file if less than 1,2 MB
+                        if (memoryStream.Length < 1200000)
                         {
                             newProduct.Image = memoryStream.ToArray();
                         }

@@ -13,6 +13,7 @@ namespace PSCS.Domain
         [Key]
         public int Id { get; set; }
 
+        [Required]
         [Range(1000,9999)]
         public int Number { get; set; }
 
@@ -31,7 +32,7 @@ namespace PSCS.Domain
 
         public override string ToString()
         {
-            return Name + " (" + Id + ")";
+            return Name + " (" + Number + ")";
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PSCS.AppLogic.Services;
+using PSCS.Domain;
 using PSCS.OrderingSystem.Models;
+using OrderLine = PSCS.Domain.OrderLine;
 
 namespace PSCS.OrderingSystem.Controllers
 {
@@ -29,17 +31,17 @@ namespace PSCS.OrderingSystem.Controllers
             return View(vm);
         }
 
-        [HttpGet("AddToCart/{item}/{amount}")]
-        public IActionResult AddToCart(int item, int amount)
+        [HttpPost("AddToCart")]
+        public IActionResult AddToCart(int id, int qty)
         {
             List<OrderLine>? orderLines = session.Get<List<OrderLine>>("Order");
             if (orderLines == null) orderLines = new List<OrderLine>();
-            orderLines.Add(new OrderLine { ProductId = item, Amount = amount });
+            orderLines.Add(new OrderLine { ProductId = id, Quantity = qty });
             orderLines = orderLines.GroupBy(o => o.ProductId)
             .Select(g => new OrderLine
             {
                 ProductId = g.Key,
-                Amount = g.Sum(o => o.Amount)
+                Quantity = g.Sum(o => o.Quantity)
             })
             .ToList();
             session.Set<List<OrderLine>>("Order", orderLines);
@@ -54,9 +56,27 @@ namespace PSCS.OrderingSystem.Controllers
         }
 
         [HttpGet("Cart")]
-        public IActionResult Cart() {
+        public async Task<IActionResult> Cart() {
             List<OrderLine>? orderLines = session.Get<List<OrderLine>>("Order");
+            if (orderLines != null)
+            {
+                foreach (OrderLine line in orderLines)
+                {
+                    line.Product = await apiService.FindProductById(line.ProductId);
+                }
+            }
             return View(orderLines);
         }
+
+        [HttpPost("ChangeQuantity")]
+        public IActionResult ChangeQuantity(int id, int qty)
+        {
+            List<OrderLine>? orderLines = session.Get<List<OrderLine>>("Order");
+            orderLines.Find(c=>c.ProductId == id).Quantity = qty;
+            session.Set<List<OrderLine>>("Order", orderLines);
+
+            return RedirectToAction("Cart");
+        }
+
     }
 }

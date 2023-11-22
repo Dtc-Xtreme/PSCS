@@ -6,6 +6,9 @@ namespace PSCS.API.Models
     {
 
         [Required]
+        public int Number { get; set; }
+
+        [Required]
         [MaxLength(25)]
         public string Name { get; set; }
 

@@ -16,6 +16,7 @@ namespace PSCS.Infrastructure
         public PSCSDbContext(IConfiguration configuration)
         {
             this.configuration = configuration;
+            Database.Migrate();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -26,6 +27,8 @@ namespace PSCS.Infrastructure
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Storage>().HasIndex(p => p.Name).IsUnique(true);
+            modelBuilder.Entity<Supplier>().HasIndex(p => p.Number).IsUnique(true);
+            modelBuilder.Entity<Product>().HasIndex(p => p.Number).IsUnique(true);
         }
 
         public DbSet<Supplier> Suppliers { get; set; }

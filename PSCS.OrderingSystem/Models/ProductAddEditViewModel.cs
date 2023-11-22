@@ -3,8 +3,9 @@
     public class ProductAddEditViewModel
     {
         public int Id { get; set; }
+        public int Number { get; set; }
         public string Name { get; set; }
-        public string Description { get; set; }
+        public string? Description { get; set; }
         public int SupplierId { get; set; }
         public IFormFile? Image { get; set; }
         public byte[]? ImageBytes { get; set; }

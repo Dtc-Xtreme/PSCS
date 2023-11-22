@@ -9,6 +9,10 @@
             <h5 class="card-title">@Model.Name (@Model.Id)</h5>
             <p class="card-text">@Model.Description</p>
         </div>
-        <a class="btn btn-primary" asp-controller="Store" asp-action="AddToCart" asp-route-item="@Model.Id" asp-route-amount="1">Add to cart</a>
+        <form class="input-group mt-3" method="post" action="/Store/AddToCart">
+            <input class="form-control" type="hidden" id="id" name="id" value="@Model.Id" />
+            <input class="form-control text-center" type="number" id="qty" name="qty" value="1" min="1" />
+            <button class="btn btn-primary rounded-0" type="submit">Add to cart</button>
+        </form>
     </div>
 </div>

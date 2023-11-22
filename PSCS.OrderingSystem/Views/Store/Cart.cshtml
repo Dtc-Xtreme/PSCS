@@ -1,4 +1,7 @@
-﻿@model List<OrderLine>
+﻿@using PSCS.Domain;
+@using OrderLine = PSCS.Domain.OrderLine;
+
+@model List<OrderLine>;
 
 <div class="card">
     <div class="card-header">
@@ -12,9 +15,11 @@
         </div>
     </div>
     <div class="card-body">
-        <table>
+        <table class="table table-striped table-hover">
             <thead>
                 <tr>
+                    <th>Image</th>
+                    <th>Number</th>
                     <th>Product</th>
                     <th>Amount</th>
                 </tr>
@@ -25,8 +30,19 @@
                     foreach (OrderLine orderLine in Model)
                     {
                         <tr>
-                            <td>@orderLine.ProductId</td>
-                            <td>@orderLine.Amount</td>
+                            <td>
+                                <img class="" src="@(orderLine.Product?.Image != null ? "data:image/png;base64,"+Convert.ToBase64String(orderLine.Product.Image) : "/no-image.png")" alt="Product Image" style="max-height: 3em; width: auto;" />
+                            </td>
+                            <td>@orderLine.Product?.Number</td>
+                            <td>@orderLine.Product?.Name</td>
+@*                             <td><button class="btn btn-secondary me-1">-</button> @orderLine.Quantity <button class="btn btn-primary ms-1">+</button></td>
+ *@                         <td>
+                                <form class="input-group" method="post" action="/Store/ChangeQuantity" style="width: 8em;">
+                                    <input class="form-control" type="hidden" id="id" name="id" value="@orderLine.ProductId" />
+                                    <input class="form-control" type="number" id="qty" name="qty" placeholder="Qty" value="@orderLine.Quantity" min="1"/>
+                                    <button type="submit" class="btn btn-primary ms-1">Save</button>
+                                </form>
+                            </td>
                         </tr>
                     }
                 }

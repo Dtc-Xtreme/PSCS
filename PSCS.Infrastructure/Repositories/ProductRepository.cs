@@ -36,6 +36,7 @@ namespace PSCS.Infrastructure.Repositories
             Product? selected = await context.Products.FirstOrDefaultAsync(c => c.Id == product.Id);
             if (selected != null)
             {
+                selected.Number = product.Number;
                 selected.Name = product.Name;
                 selected.Description = product.Description;
                 selected.SupplierId = product.SupplierId;

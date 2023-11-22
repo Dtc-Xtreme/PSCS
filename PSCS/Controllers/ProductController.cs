@@ -42,6 +42,7 @@ namespace PSCS.Controllers
             {
                 newProduct = new Product
                 {
+                    Number = product.Number,
                     Name = product.Name,
                     Description = product.Description,
                     SupplierId = product.SupplierId,
