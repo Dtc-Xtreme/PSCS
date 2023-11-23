@@ -33,23 +33,11 @@ namespace PSCS.Controllers
             return Ok(product == null ? BadRequest() : product);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Create(ProductDTO product)
+        [HttpGet("FindAllByNameOrId/{search}")]
+        public async Task<IActionResult> FindAllByNameOrId(string search)
         {
-            Product? newProduct = null;
-
-            if (ModelState.IsValid)
-            {
-                newProduct = new Product
-                {
-                    Number = product.Number,
-                    Name = product.Name,
-                    Description = product.Description,
-                    SupplierId = product.SupplierId,
-                    Image = product.Image
-                };
-            }
-            return Ok(await productRepository.Create(newProduct) == false ? BadRequest() : newProduct);
+            IList<Product>? products = await productRepository.FindAllByNameOrId(search);
+            return Ok(products == null ? NotFound() : products);
         }
 
         [HttpPut]

@@ -3,13 +3,18 @@
 @model Product;
 
 <div class="col-sm-6 col-lg-3">
-    <div class="card h-100">
-        <div class="card-body">
+    <div class="card h-100 ">
+        <div class="card-body overflow-hidden">
+            <span class="badge text-bg-success w-100">#@Model.Number</span>
             <img class="card-img-top mx-auto d-block" src="@(Model.Image != null ? "data:image/png;base64,"+Convert.ToBase64String(Model.Image) : "~/no-image.png")" alt="Product Image" style="max-height: 8em; width: auto;" />
-            <h5 class="card-title">@Model.Name (@Model.Id)</h5>
-            <p class="card-text">@Model.Description</p>
+            <h5 class="card-title   ">@Model.Name</h5>
+            <p class="card-text mt-3">@Model.Description</p>
         </div>
         <form class="input-group mt-3" method="post" action="/Store/AddToCart">
+            <div class="input-group-text rounded-0">
+                FP
+                <input class="form-check-input ms-2 mt-0" type="checkbox" value="" aria-label="Checkbox for FP">
+            </div>
             <input class="form-control" type="hidden" id="id" name="id" value="@Model.Id" />
             <input class="form-control text-center" type="number" id="qty" name="qty" value="1" min="1" />
             <button class="btn btn-primary rounded-0" type="submit">Add to cart</button>

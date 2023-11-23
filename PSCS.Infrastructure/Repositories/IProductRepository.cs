@@ -10,6 +10,7 @@ namespace PSCS.Infrastructure.Repositories
     public interface IProductRepository : IPSCSRepository<Product>
     {
         public IQueryable<Product> Products { get; }
+        public Task<List<Product>?> FindAllByNameOrId(string search);
         public Task<bool> Update(Product product);
     }
 }

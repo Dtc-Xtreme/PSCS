@@ -31,6 +31,17 @@ namespace PSCS.Infrastructure.Repositories
             return await Products.FirstOrDefaultAsync(c => c.Id == id);
         }
 
+        public async Task<List<Product>?> FindAllByNameOrId(string search)
+        {
+
+            if(int.TryParse(search, out int productNumber))
+            {
+                return await Products.Where(c => c.Number == productNumber || c.Name.ToLower().Contains(search.ToLower())).ToListAsync();
+            }
+
+            return await Products.Where(c => c.Name.ToLower().Contains(search.ToLower())).ToListAsync();
+        }
+
         public async Task<bool> Update(Product product)
         {
             Product? selected = await context.Products.FirstOrDefaultAsync(c => c.Id == product.Id);

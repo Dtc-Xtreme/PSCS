@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using PSCS.AppLogic.Services;
-using PSCS.OrderingSystem.Models;
+using PSCS.Domain;
 
 namespace PSCS.OrderingSystem.Controllers
 {

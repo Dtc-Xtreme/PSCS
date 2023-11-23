@@ -16,17 +16,15 @@ namespace PSCS.OrderingSystem.Controllers
             this.apiService = api;
         }
 
-        [HttpGet]
         [HttpGet("{Search?}")]
         public async Task<IActionResult> Index(string? search)
         {
             StoreSearchViewModel vm = new StoreSearchViewModel
             {
-                Products = await apiService.GetAllProducts(),
+                Products = search != null && search != string.Empty ? await apiService.FindAllByNameOrId(search) : await apiService.GetAllProducts(),
+                //Products = search != null && search != string.Empty ? await apiService.FindAllByNameOrId(search) : null,
                 Search = search
             };
-
-            if (!string.IsNullOrEmpty(search)) vm.Products = vm.Products?.Where(c => c.Name.ToLower().Contains(search.ToLower()) || c.Id.ToString().ToLower().Contains(search.ToLower())).ToList();
 
             return View(vm);
         }
@@ -65,7 +63,14 @@ namespace PSCS.OrderingSystem.Controllers
                     line.Product = await apiService.FindProductById(line.ProductId);
                 }
             }
-            return View(orderLines);
+            ConfirmViewModel vm = new ConfirmViewModel
+            {
+                OrderLines = orderLines
+            };
+
+            ViewBag.Zones = await apiService.GetAllZones();
+
+            return View(vm);
         }
 
         [HttpPost("ChangeQuantity")]
@@ -76,6 +81,22 @@ namespace PSCS.OrderingSystem.Controllers
             session.Set<List<OrderLine>>("Order", orderLines);
 
             return RedirectToAction("Cart");
+        }
+
+        [HttpGet("ClearOrderLine/{line}")]
+        public IActionResult ClearOrderLine(int line)
+        {
+            List<OrderLine>? orderLines = session.Get<List<OrderLine>>("Order");
+            orderLines.RemoveAt(line);
+            session.Set<List<OrderLine>>("Order", orderLines);
+
+            return RedirectToAction("Cart");
+        }
+
+        [HttpPost("Confirm")]
+        public IActionResult Confirm(ConfirmViewModel vm)
+        {
+            return RedirectToAction("Index");
         }
 
     }

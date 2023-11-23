@@ -24,6 +24,7 @@ namespace PSCS.AppLogic.Services
 
         public Task<IList<Product>?> GetAllProducts();
         public Task<Product?> FindProductById(int id);
+        public Task<IList<Product>?> FindAllByNameOrId(string search);
         public Task<Product?> SaveProduct(Product product);
         public Task<bool> RemoveProduct(int id);
 

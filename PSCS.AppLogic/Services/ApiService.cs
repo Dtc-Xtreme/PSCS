@@ -169,6 +169,18 @@ namespace PSCS.AppLogic.Services
                 return null;
             }
         }
+        public async Task<IList<Product>?> FindAllByNameOrId(string search)
+        {
+            try
+            {
+                return await client.GetFromJsonAsync<List<Product>>(url + "/Product/FindAllByNameOrId/" + search);
+
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
         public async Task<Product?> FindProductById(int id)
         {
             try

@@ -1,54 +1,80 @@
 ﻿@using PSCS.Domain;
 @using OrderLine = PSCS.Domain.OrderLine;
 
-@model List<OrderLine>;
+@model ConfirmViewModel;
 
-<div class="card">
-    <div class="card-header">
-        <div class="row">
-            <div class="col">
-                <h4 class="pt-1 m-0">Cart</h4>
+    
+<form class="" method="post" action="/Store/Confirm">
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col">
+                    <h4 class="pt-1 m-0">Cart</h4>
+                </div>
+                <div class="col-auto">
+                    <a class="btn btn-danger" asp-controller="Store" asp-action="ClearCart">Clear Cart</a>
+                </div>
             </div>
-            <div class="col-auto">
-                <a class="btn btn-danger" asp-controller="Store" asp-action="ClearCart">Clear Cart</a>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th class="text-center ">Image</th>
+                        <th class="">PSCS #</th>
+                        <th class="">Name</th>
+                        <th class="text-center" style="width: 6em;">Quantity</th>
+                        <th class="text-center">Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.OrderLines != null)
+                    {
+                        int i = 0;
+                        foreach (OrderLine orderLine in Model.OrderLines)
+                        {
+                            <tr>
+                                <td class="align-middle text-center">
+                                    <img class="rounded border-1" src="@(orderLine.Product?.Image != null ? "data:image/png;base64,"+Convert.ToBase64String(orderLine.Product.Image) : "/no-image.png")" alt="Product Image" style="max-height: 3em; width: auto;" />
+                                </td>
+                                <td class="align-middle">@orderLine.Product?.Number</td>
+                                <td class="align-middle">@orderLine.Product?.Name</td>
+                                <td class="align-middle text-center">
+                                    <div>
+                                        <input class="form-control" type="hidden" id="id" name="OrderLines[@i].ProductId" value="@orderLine.ProductId" />
+                                        <input class="form-control" type="number" id="qty" name="OrderLines[@i].Quantity" placeholder="Qty" value="@orderLine.Quantity" min="1" />
+                                    </div>
+                                </td>
+                                <td class="align-middle text-center"><a class="btn btn-danger" asp-controller="Store" asp-action="ClearOrderLine" asp-route-line="@i">X</a></td>
+                            </tr>
+                            i++;
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card my-4">
+        <div class="card-header">
+            <div class="row">
+                <div class="col">
+                    <h4 class="pt-1 m-0">Delivery to</h4>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="input-group">
+                <label class="input-group-text" for="zone">Zone</label>
+                <select class="form-select" id="zone" class="form-control" asp-for="@Model.SupplierId">
+                    @foreach (Zone zone in ViewBag.Zones)
+                    {
+                        <option value="@zone.Id">@zone.Name</option>
+                    }
+                </select>
             </div>
         </div>
     </div>
-    <div class="card-body">
-        <table class="table table-striped table-hover">
-            <thead>
-                <tr>
-                    <th>Image</th>
-                    <th>Number</th>
-                    <th>Product</th>
-                    <th>Amount</th>
-                </tr>
-            </thead>
-            <tbody>
-                @if(Model != null)
-                {
-                    foreach (OrderLine orderLine in Model)
-                    {
-                        <tr>
-                            <td>
-                                <img class="" src="@(orderLine.Product?.Image != null ? "data:image/png;base64,"+Convert.ToBase64String(orderLine.Product.Image) : "/no-image.png")" alt="Product Image" style="max-height: 3em; width: auto;" />
-                            </td>
-                            <td>@orderLine.Product?.Number</td>
-                            <td>@orderLine.Product?.Name</td>
-@*                             <td><button class="btn btn-secondary me-1">-</button> @orderLine.Quantity <button class="btn btn-primary ms-1">+</button></td>
- *@                         <td>
-                                <form class="input-group" method="post" action="/Store/ChangeQuantity" style="width: 8em;">
-                                    <input class="form-control" type="hidden" id="id" name="id" value="@orderLine.ProductId" />
-                                    <input class="form-control" type="number" id="qty" name="qty" placeholder="Qty" value="@orderLine.Quantity" min="1"/>
-                                    <button type="submit" class="btn btn-primary ms-1">Save</button>
-                                </form>
-                            </td>
-                        </tr>
-                    }
-                }
-            </tbody>
-        </table>
 
-
-    </div>
-</div>
+    <button type="submit" class="btn btn-primary">Confirm</button>
+</form>
