@@ -6,6 +6,6 @@ namespace PSCS.OrderingSystem.Models
     {
         public List<OrderLine>? OrderLines { get; set; }
 
-        public int SupplierId { get; set; }
+        public int ZoneId { get; set; }
     }
 }

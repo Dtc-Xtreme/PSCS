@@ -12,8 +12,8 @@
         </div>
         <form class="input-group mt-3" method="post" action="/Store/AddToCart">
             <div class="input-group-text rounded-0">
-                FP
-                <input class="form-check-input ms-2 mt-0" type="checkbox" value="" aria-label="Checkbox for FP">
+                <label class="user-select-none" for="fp">FP</label>
+                <input class="form-check-input ms-2 mt-0" type="checkbox" id="fp" name="fp" aria-label="Checkbox for FP">
             </div>
             <input class="form-control" type="hidden" id="id" name="id" value="@Model.Id" />
             <input class="form-control text-center" type="number" id="qty" name="qty" value="1" min="1" />

@@ -21,7 +21,7 @@ namespace PSCS.OrderingSystem.Controllers
         [HttpGet("{Search?}")]
         public async Task<IActionResult> Index(string? search)
         {
-            IList<Storage>? storages = await apiService.GetAllStorages(); ;
+            IList<Storage>? storages = await apiService.GetAllStorages();
 
             if (!string.IsNullOrEmpty(search)) storages = storages?.Where(c=>c.Name.ToLower().Contains(search.ToLower())).ToList();
 

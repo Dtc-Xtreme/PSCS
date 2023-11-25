@@ -12,7 +12,7 @@ using PSCS.Infrastructure;
 namespace PSCS.Infrastructure.Migrations
 {
     [DbContext(typeof(PSCSDbContext))]
-    [Migration("20231122093055_init")]
+    [Migration("20231125214624_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -52,6 +52,9 @@ namespace PSCS.Infrastructure.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<bool>("Done")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("FullPallet")
                         .HasColumnType("bit");
 
                     b.Property<int?>("OrderId")

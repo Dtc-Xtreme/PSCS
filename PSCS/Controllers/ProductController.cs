@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.Identity.Client.Extensions.Msal;
 using PSCS.API.Models;
 using PSCS.Domain;
 using PSCS.Infrastructure.Repositories;
@@ -38,6 +39,26 @@ namespace PSCS.Controllers
         {
             IList<Product>? products = await productRepository.FindAllByNameOrId(search);
             return Ok(products == null ? NotFound() : products);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(ProductDTO product)
+        {
+
+            Product? newProduct = null;
+
+            if (ModelState.IsValid)
+            {
+                newProduct = new Product
+                {
+                    Name = product.Name,
+                    Number = product.Number,
+                    Description = product.Description,
+                    SupplierId = product.SupplierId,
+                    Image = product.Image,
+                };
+            }
+            return Ok(await productRepository.Create(newProduct) == false ? BadRequest() : newProduct);
         }
 
         [HttpPut]

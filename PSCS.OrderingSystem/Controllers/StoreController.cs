@@ -30,16 +30,17 @@ namespace PSCS.OrderingSystem.Controllers
         }
 
         [HttpPost("AddToCart")]
-        public IActionResult AddToCart(int id, int qty)
+        public IActionResult AddToCart(int id, int qty, string? fp)
         {
             List<OrderLine>? orderLines = session.Get<List<OrderLine>>("Order");
             if (orderLines == null) orderLines = new List<OrderLine>();
-            orderLines.Add(new OrderLine { ProductId = id, Quantity = qty });
+            orderLines.Add(new OrderLine { ProductId = id, Quantity = qty, FullPallet = fp != null ? true : false });
             orderLines = orderLines.GroupBy(o => o.ProductId)
             .Select(g => new OrderLine
             {
                 ProductId = g.Key,
-                Quantity = g.Sum(o => o.Quantity)
+                Quantity = g.Sum(o => o.Quantity),
+                FullPallet = g.Last().FullPallet
             })
             .ToList();
             session.Set<List<OrderLine>>("Order", orderLines);
@@ -94,8 +95,18 @@ namespace PSCS.OrderingSystem.Controllers
         }
 
         [HttpPost("Confirm")]
-        public IActionResult Confirm(ConfirmViewModel vm)
+        public async Task<IActionResult> Confirm(ConfirmViewModel vm)
         {
+            if (ModelState.IsValid)
+            {
+                Order newOrder = new Order
+                {
+                    ZoneId = vm.ZoneId,
+                    OrderLines = vm.OrderLines
+                };
+                Order? result = await apiService.SaveOrder(newOrder);
+                if (result != null) return RedirectToAction("Index");
+            }
             return RedirectToAction("Index");
         }
 

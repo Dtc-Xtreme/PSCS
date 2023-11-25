@@ -14,8 +14,9 @@ namespace PSCS.Domain
 
         public List<OrderLine> OrderLines { get; set; } = new List<OrderLine>();
 
-        [Required]
         public Zone Zone { get; set; }
+
+        [Required]
         public int ZoneId { get; set; }
     }
 }

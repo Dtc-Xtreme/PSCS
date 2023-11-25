@@ -20,7 +20,7 @@ namespace PSCS.Domain
         [Required]
         public int Quantity { get; set; }
 
-        public int FullPallet {  get; set; }
+        public bool FullPallet { get; set; } = false;
 
         public bool Done { get; set; } = false;
     }

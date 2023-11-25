@@ -6,7 +6,10 @@ namespace PSCS.API.Models
     {
         [Required]
         public int ProductId { get; set; }
+
         [Required]
         public int Quantity { get; set; }
+
+        public bool FullPallet { get; set; } = false;
     }
 }

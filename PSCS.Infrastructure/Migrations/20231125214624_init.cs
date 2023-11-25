@@ -105,6 +105,7 @@ namespace PSCS.Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProductId = table.Column<int>(type: "int", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
+                    FullPallet = table.Column<bool>(type: "bit", nullable: false),
                     Done = table.Column<bool>(type: "bit", nullable: false),
                     OrderId = table.Column<int>(type: "int", nullable: true)
                 },

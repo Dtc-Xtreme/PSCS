@@ -286,5 +286,42 @@ namespace PSCS.AppLogic.Services
                 return false;
             }
         }
+
+        public async Task<IList<Order>?> GetAllOrders()
+        {
+            try
+            {
+                return await client.GetFromJsonAsync<List<Order>>(url + "/Order");
+
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public async Task<Order?> SaveOrder(Order order)
+        {
+            try
+            {
+                HttpResponseMessage httpResponseMessage;
+
+                if (order.Id == 0)
+                {
+                    httpResponseMessage = await client.PostAsJsonAsync(url + "/Order", order);
+                }
+                else
+                {
+                    httpResponseMessage = await client.PutAsJsonAsync(url + "/Order", order);
+                }
+
+                Order? result = httpResponseMessage.Content.ReadFromJsonAsync<Order>().Result;
+                return httpResponseMessage.StatusCode == HttpStatusCode.OK ? result : null;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
     }
 }

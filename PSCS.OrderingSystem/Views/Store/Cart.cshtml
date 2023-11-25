@@ -23,6 +23,7 @@
                         <th class="text-center ">Image</th>
                         <th class="">PSCS #</th>
                         <th class="">Name</th>
+                        <th class="text-center">FP</th>
                         <th class="text-center" style="width: 6em;">Quantity</th>
                         <th class="text-center">Delete</th>
                     </tr>
@@ -39,6 +40,16 @@
                                 </td>
                                 <td class="align-middle">@orderLine.Product?.Number</td>
                                 <td class="align-middle">@orderLine.Product?.Name</td>
+                                <td class="align-middle text-center">
+                                    @if(orderLine.FullPallet)
+                                    {
+                                        <input class="align-middle form-check-input ms-2 mt-0" type="checkbox" aria-label="Checkbox for FP" checked disabled />
+                                    }
+                                    else
+                                    {
+                                        <input class="align-middle form-check-input ms-2 mt-0" type="checkbox" aria-label="Checkbox for FP" disabled />
+                                    }
+                                </td>
                                 <td class="align-middle text-center">
                                     <div>
                                         <input class="form-control" type="hidden" id="id" name="OrderLines[@i].ProductId" value="@orderLine.ProductId" />
@@ -66,7 +77,7 @@
         <div class="card-body">
             <div class="input-group">
                 <label class="input-group-text" for="zone">Zone</label>
-                <select class="form-select" id="zone" class="form-control" asp-for="@Model.SupplierId">
+                <select class="form-select" id="zone" class="form-control" asp-for="@Model.ZoneId">
                     @foreach (Zone zone in ViewBag.Zones)
                     {
                         <option value="@zone.Id">@zone.Name</option>
