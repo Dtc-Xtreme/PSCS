@@ -1,0 +1,28 @@
+﻿@using PSCS.AppLogic.Services;
+@using PSCS.Domain;
+@page "/Orders"
+
+<PageTitle>Orders</PageTitle>
+
+<h1>OrderToDo</h1>
+
+@if (OrderList != null)
+{
+    foreach (Order order in OrderList)
+    {
+        <div>Zone: @order.Zone</div>
+        <div>Orderlines: @order.OrderLines.Count</div>
+    }
+}
+
+@code {
+    [Inject]
+    private IApiService ApiService { get; set; }
+
+    public IList<Order>? OrderList { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        OrderList = await ApiService.GetAllOrders();
+    }
+}

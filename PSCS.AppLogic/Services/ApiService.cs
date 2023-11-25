@@ -8,6 +8,7 @@ using System.Net.Http.Json;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.WebRequestMethods;
 
 namespace PSCS.AppLogic.Services
 {
@@ -16,7 +17,7 @@ namespace PSCS.AppLogic.Services
         private readonly IConfiguration configuration;
 
         private HttpClient client = new HttpClient();
-        private string? url;
+        private string? url = "https://localhost:44383";
 
         public ApiService(IConfiguration configuration)
         {
